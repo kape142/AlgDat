@@ -6,7 +6,7 @@ class RelationProperties {
      * No checks are performed.
      */
 
-    private static boolean isReflexive(char[][] relation, char[] set){
+    private static boolean isReflexive(char[][] relation, char[] set){ //r*s
         boolean[] check = new boolean[set.length];
         for (int i = 0; i < set.length; i++) {
             char c = set[i];
@@ -25,7 +25,7 @@ class RelationProperties {
         return true;
     }
 
-    private static boolean isSymmetric(char[][] relation, char[] set){
+    private static boolean isSymmetric(char[][] relation, char[] set){ //r^2
         for (int i = 0; i < relation.length; i++) {
             if(relation[i][0] == relation[i][1]){
                 continue;
@@ -44,7 +44,7 @@ class RelationProperties {
         return true;
     }
 
-    private static boolean isTransitive(char[][] relation, char[] set){
+    private static boolean isTransitive(char[][] relation, char[] set){ //r^3
         for (int i = 0; i < relation.length; i++) {
             if(relation[i][0]==relation[i][1]){
                 continue;
@@ -71,7 +71,7 @@ class RelationProperties {
         return true;
     }
 
-    private static boolean isAntiSymmetric(char[][] relation, char[] set){
+    private static boolean isAntiSymmetric(char[][] relation, char[] set){ //r^2
         for (int i = 0; i < relation.length; i++) {
             if(relation[i][0] == relation[i][1]){
                 continue;
@@ -90,11 +90,11 @@ class RelationProperties {
         return true;
     }
 
-    private static boolean isEquivalenceRelation(char[][] relation, char[] set){
+    private static boolean isEquivalenceRelation(char[][] relation, char[] set){ //n^3
 	    return isReflexive(relation,set) && isSymmetric(relation,set) && isTransitive(relation,set);
     }
 
-    private static boolean isPartialOrder(char[][] relation, char[] set){
+    private static boolean isPartialOrder(char[][] relation, char[] set){ //n^3
         return isReflexive(relation,set) && isAntiSymmetric(relation,set) && isTransitive(relation,set);
     }
 
