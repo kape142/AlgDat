@@ -1,3 +1,5 @@
+package Øving10;
+
 /**
  * Created by KarlPeter on 26.10.2017.
  */
@@ -17,10 +19,11 @@ public class Øving10 {
                 "10"
         };
         String[] regex = {
-                ".*\\d.*", //streng inneholder tall
-                "(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[\\/\\-]\\d{4}", //streng er dato på form dd/mm/yyyy
-                ".{10}.*", //streng har minst 10 tegn
-                ".*[^a-zA-Z].*" // streng inneholder andre tegn enn bokstaver
+                ".*\\d.*",                                                      //Streng inneholder tall
+                "(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[\\/\\-]\\d{4}",   //Streng er dato på form dd/mm/yyyy
+                ".{10}.*",                                                      //Streng har minst 10 tegn
+                ".*[^a-zA-Z].*"                                                 //Streng inneholder andre tegn enn
+                // bokstaver
         };
         for (int i = 0; i < regex.length; i++) {
             System.out.println((i+1)+". regex");
@@ -34,6 +37,8 @@ public class Øving10 {
 
     }
 }
+
+//
 
 // 11*|10*
 // xy(x*y)*|(yx|y)y
