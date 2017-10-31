@@ -18,13 +18,16 @@ public class Øving10 {
                 "1111",
                 "10"
         };
+
         String[] regex = {
-                ".*\\d.*",                                                      //Streng inneholder tall
-                "(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[\\/\\-]\\d{4}",   //Streng er dato på form dd/mm/yyyy
-                ".{10}.*",                                                      //Streng har minst 10 tegn
-                ".*[^a-zA-Z].*"                                                 //Streng inneholder andre tegn enn
+                ".*\\d.*",                                                       //Streng inneholder tall
+                "(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[\\/\\-]\\d{4}",    //Streng er dato på form dd/mm/yyyy
+                ".{10}.*",                                                       //Streng har minst 10 tegn
+                ".*[^a-zA-Z].*",                                                //Streng inneholder andre tegn enn
                 // bokstaver
+                "(0(0|1)*|(0|1)*0)*"
         };
+
         for (int i = 0; i < regex.length; i++) {
             System.out.println((i+1)+". regex");
             for (String s : strings) {
@@ -38,16 +41,15 @@ public class Øving10 {
     }
 }
 
-//
-
 // 11*|10*
 // xy(x*y)*|(yx|y)y
 
-// (a*b*)*b[ab]{2}   (a*b*)*b[ab][ab]    (a*b*)*b(a|b)(a|b)
-// y*(xyy*)*
+// [ab]*b[ab]{2}   (a*b*)*b[ab][ab]    (a|b)*b(a|b)(a|b)
+// y*(xyy*)*(x|e)
 
 //(rs)* er ikke lik r*s*. rsrsrsrsrs vs. rrrrrrrrsssssss
 //(rs)* ((rs)*)* er like. den siste er bare 0 til mange av den første (som allerede er null til mange
+
 
 
 //nettside test "(http(s)?:\\/\\/)?(www\\.)?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+(\\/.*)*"
