@@ -13,14 +13,6 @@ class Compressor {
         int length = (int) f.length(); //finner bytelengden av fila
         data = new byte[length];
         innfil.readFully(data,0,length); //lagrer alt innholdet i data[]
-        for(byte b : data){
-            System.out.print(b+", ");
-        }
-        System.out.println();
-        for(byte b : data){
-            System.out.print((char)b);
-        }
-        System.out.println("\n"+data.length);
         ArrayList<Byte> compressed = new ArrayList<>();
         // et tall for hvor mange indekser bakover dataen ligger, og hvor mange den skal lese fremover fra det punktet
         ArrayList<Byte> found = new ArrayList<>(); //midlertidig, inneholder en liste over tegn i rekkfølge som skal
@@ -39,34 +31,31 @@ class Compressor {
             // komprimering er blitt lagt til eller en byte er bekreftet at ikke kan komprimeres
             found.add(data[i]); //starter med neste bokstav
             int lastPos = -1;
-            int pos = foundInLibrary(found,i); //finner første posisjon til alle bytesene i found, i library.
+            int pos = foundInLibrary(found, i); //finner første posisjon til alle bytesene i found, i library.
             int check = 0; //hvor mange bytes som matcher i library (kan kanskje erstattes med found.length?)
-            while(pos>0){
-                lastPos=pos; //lagrer forrige posisjon der bytesene ble funnet, så de kan settes inn for komprimering
+            while (pos > 0) {
+                lastPos = pos; //lagrer forrige posisjon der bytesene ble funnet, så de kan settes inn for komprimering
                 // når den kommer til en bytestreng som ikke finnes
                 check++;
-                if(i+check<length) {
+                if (i + check < length) {
                     found.add(data[i + check]); //legger til neste byte for sjekking
-                    pos = foundInLibrary(found,i);
-                }else{
+                    pos = foundInLibrary(found, i);
+                } else {
                     break;
                 }
             }
-            if(check>=5){ // hvis den fant minst 5 bytes som finnes tidligere i data[]
-                compressed.add((byte)-(i-lastPos)); //legger inn en negativ byte som peker bakover på hvor dataen
+            if (check >= 5) { // hvis den fant minst 5 bytes som finnes tidligere i data[]
+                compressed.add((byte) -(i - lastPos)); //legger inn en negativ byte som peker bakover på hvor dataen
                 // finnes i data[]
-                compressed.add((byte)(check)); //hvor mange bytes som skal leses fra det punktet
-                positions.add(i-lost+positions.size()+2); //lagrer posisjonen til denne komprimeringen for bruk i
+                compressed.add((byte) (check)); //hvor mange bytes som skal leses fra det punktet
+                positions.add(i - lost + positions.size() + 2); //lagrer posisjonen til denne komprimeringen for bruk i
                 // beregning av hvor mange bytes som må leses vanlig uten komprimering
-                lost+=check-2; //legger inn hvor mange bytes som er mista i komprimering: antall bytes som matcher,
+                lost += check - 2; //legger inn hvor mange bytes som er mista i komprimering: antall bytes som matcher,
                 // minus to bytes til referanser
-                i+=check-1; //hopper videre i data[] til neste byte som ikke er komprimert
-            }else{
+                i += check - 1; //hopper videre i data[] til neste byte som ikke er komprimert
+            } else {
                 compressed.add(data[i]);
             }
-        }
-        for(byte b : compressed){
-            System.out.print((char)b);
         }
         byte[] out = new byte[compressed.size()+positions.size()]; //den endelige komprimerte fila. det som mangler
         // er å legge inn tall for hvor mange bytes som må leses vanlig uten komprimering
@@ -84,7 +73,7 @@ class Compressor {
                     posScroll++;
                     positions.add(positions.get(positions.size()-1));
                     for (int j = positions.size()-2; j > posScroll; j--) {
-                        positions.set(j,positions.get(j-1));
+                        positions.set(j,positions.get(j-1)+1);
                     }
                     positions.set(posScroll,i+ byteMaxValue +1);
                 }else {
@@ -98,11 +87,6 @@ class Compressor {
         //skriver til fil
         DataOutputStream utfil = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(output)));
         utfil.write(out,0,out.length);
-        System.out.println();
-        for(byte b : out){
-            System.out.print(b+", ");
-        }
-        System.out.println();
         utfil.close();
         innfil.close();
     }
