@@ -23,7 +23,7 @@ public class Øving10 {
                 ".*\\d.*",                                                       //Streng inneholder tall
                 "(0?[1-9]|[12][0-9]|3[01])[/](0?[1-9]|1[012])[\\/\\-]\\d{4}",    //Streng er dato på form dd/mm/yyyy
                 ".{10}.*",                                                       //Streng har minst 10 tegn
-                ".*[^a-zA-Z].*",                                                //Streng inneholder andre tegn enn
+                ".*[^a-zA-ZæøåÆØÅ].*",                                                //Streng inneholder andre tegn enn
                 // bokstaver
                 "(0(0|1)*|(0|1)*0)*"
         };
@@ -52,4 +52,4 @@ public class Øving10 {
 
 
 
-//nettside test "(http(s)?:\\/\\/)?(www\\.)?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+(\\/.*)*"
+//nettside input.txt "(http(s)?:\\/\\/)?(www\\.)?[A-Za-z0-9]+(\\.[A-Za-z0-9]+)+(\\/.*)*"

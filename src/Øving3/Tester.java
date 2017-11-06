@@ -6,10 +6,10 @@ import java.util.Random;
  * Created by KarlPeter on 30.08.2017.
  */
 public class Tester {
-    private static int tests = 300;
+    private static int tests = 30;
     private static int opt = 20;
     private static int size = 100000;
-    private static double spread = 1;
+    private static double spread = 0.001;
     private static boolean show = false;
     private static Sorter sorter = new Sorter();
     private static Random random = new Random(41);
